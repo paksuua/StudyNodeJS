@@ -4,12 +4,14 @@ let User = require('../models/user');
 
 // 회원가입
 router.post('/signup', async (req, res) => {
-  // reqest 데이터 가져오기
-  const {id, name, password, email} =req.body;
-  // user.js에 유저 추가하기
-  User.push({id, name, password, email});
-  // response 데이터 내보내기
-  res.status(200).send(User);
+  const {id, name, password, email} = req.body;
+  // request data 확인 - 없다면 Bad Request 반환
+  if( !id || !name || !password || !email){
+    return res.status(400).send({message: 'BAD REQUEST'});
+  }
+  // 이미 가입된 id
+  if (User.filter(user => user.id == id).length > 0){
+    return res.status(400).send({message: 'ALREADY ID'});
+  }
 });
-
 module.exports = router;
