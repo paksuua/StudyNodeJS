@@ -1,5 +1,6 @@
 module.exports = {
     OK: 200,
+    ADMIN_OK: 202,
     CREATED: 201,
     NO_CONTENT: 204,
     BAD_REQUEST: 400,
